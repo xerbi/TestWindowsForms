@@ -1,38 +1,86 @@
 {
   "question_level1": [
     {
-      "question": "����� ����������� ��������� ������ ���� int?",
-      "answer": [ "4 �����", "2 �����", "1 ����", "3 �����" ]
+      "question": "Какой минимальный возможный размер типа int?",
+      "answer": ["4 байта", "2 байта", "1 байт", "3 байта"]
     },
     {
-      "question": "",
-      "answer": []
+      "question": "Какой из следующих целых типов имеет размер 2 байта?",
+      "answer": ["short", "byte", "long", "int"]
     },
     {
-      "question": "",
-      "answer": []
+      "question": "Какой символ используется для интерполяции строки?",
+      "answer": ["$", "#", "%", "@"]
     },
     {
-      "question": "",
-      "answer": []
+      "question": "Какой из следующих типов является ссылочным?",
+      "answer": ["string", "decimal", "double", "char"]
     },
     {
-      "question": "",
-      "answer": []
+      "question": "Выберите результат выполнения программы:\nfloat a = 9.5f;\nConsole.Write((int)a);",
+      "answer": ["9", "10", "9.5", "error"]
     },
     {
-      "question": "",
-      "answer": []
+      "question": "В какой из преведенных типов безопасно явно преобразовать тип int?",
+      "answer": ["long", "short", "uint", "char"]
+    },
+    {
+      "question": "Выбирите результат выполнения программы:\nint a = 10, b = 20;\nint result = a > b ? a : b;\nConsole.Write(result);",
+      "answer": ["20", "10", "0", "error"]
+    },
+    {
+      "question": "Если в полях класса не укзаан модификатор доступа, какой модификатор присвоится по умолчанию?",
+      "answer": ["private", "public", "static", "protected"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nstatic void testMethod(ref int a)\n{\n\ta += 100;\n}\nstatic void Main(string[] args)\n{\n\tint b = 10;\n\ttestMethod(ref b);\n\tConsole.Write(b);\n}",
+      "answer": ["110", "10", "0", "error"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nstring? text = null;\nstring name = text ?? \"Tom\";\nConsole.Write(name);",
+      "answer": ["Tom", "null", "ничего", "error"]
     }
   ],
   "question_level2": [
     {
-      "question": "",
-      "answer": []
+      "question": "В каком из приведенных вариантов правильно описано объявление типа перечисления?",
+      "answer": [	"enum Day{Sat, Sun, Mon, Tue, Wed, Thu, Fri}", "enum {Sat, Sun, Mon, Tue, Wed, Thu, Fri}", "{Sat, Sun, Mon, Tue, Wed, Thu, Fri} as Enum", "list Day{Sat, Sun, Mon, Tue, Wed, Thu, Fri}"]
     },
     {
-      "question": ":\nclass Test\n{\n\tstatic int sum (int a, int b)\n{\n\t\treturn a + b;\n\t}\n}"
-      "answer": []
+      "question": "Выберите результат выполнения программы:\nclass Test\n{\n\tstatic int sum (int a, int b)\n\t{\n\t\treturn a + b;\n\t}\n}\nstatic void Main(string[] args)\n{\n\tTest t = new Test();\n\tint result = t.sum(10, 20);\n\tConsole.Write(result);\n}",
+      "answer": ["error", "30", "0", "-30"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nclass A\n{\n\tpublic int a;\n\tpublic int b;\n\tpublic int sum() => a + b;\n}\nclass Test : A\n{\n\tpublic int c;\n\tpublic int sum() => a + b + c;\n}\nstatic void Main(string[] args)\n{\n\tTest t = new Test();\n\tt.a = 10;\n\tt.b = 20;\n\tt.c = 30;\n\tint result = t.sum();\n\tConsole.Write(result);\n}",
+      "answer": ["60", "30", "0", "error"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nif (false)\n{\nint i = 1;\n}\nint i = 2;\nConsole.Write(i);",
+      "answer": ["error", "1", "2", "0"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nclass A { }\nclass B : A { }\nstatic void Main(string[] args)\n{\n\tA a = new A();\n\tB b = new B();\nConsole.WriteLine(a is A);\nConsole.WriteLine(a is B);\nConsole.WriteLine(b is A);\nConsole.WriteLine(b is B);\n}",
+      "answer": ["True False True True", "True False True False", "True False False True", "error"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nint[] mas = new int[10];\nforeach (var i in mas)\n{\n\tConsole.WriteLine(i);\n}",
+      "answer": ["0 0 0 0 0 0 0 0 0 0", "1 2 3 4 5 6 7 8 9 10", "0 1 2 3 4 5 6 7 8 9", "ничего не выведет"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n\treturn a - b;\n}\nstatic float testMethod(int b, int a)\n{\n\treturn a + b;\n}\nstatic void Main(string[] args)\n{\n\tConsole.WriteLine(testMethod(30, 20));\n}",
+      "answer": ["Error", "10", "50", "0"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nclass A\n{\n\tpublic int sum(int a, int b) => a + b;\n}\nclass B\n{\n\tpublic float multiply(int a, int b) => a * b;\n}\nclass C : A : B {}\nstatic void Main(string[] args)\n{\n\tC c = new C();\n\tConsole.WriteLine(c.sum(10, 10));\n\tConsole.WriteLine(c.multiply(10, 10));\n}",
+      "answer": ["error", "20 100", "0", "ничего"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n\treturn a - b;\n}\nstatic int testMethod(float b, int a)\n{\n\treturn a + b;\n}\nstatic void Main(string[] args)\n{\n\tConsole.WriteLine(testMethod(30, 20));\n}",
+      "answer": ["10", "error", "50", "0"]
+    },
+    {
+      "question": "Выберите результат выполнения программы:\nclass Test\n{\n\tstatic int counter = 0;\n\tpublic static int Counter => counter;\n\tpublic Test()\n\t{\n\t\tcounter++;\n\t}\n}\nstatic void Main(string[] args)\n{\n\tTest t1 = new Test();\n\tTest t2 = new Test();\n\tTest t3 = new Test();\n\tTest t4 = new Test();\n\tTest t5 = new Test();\n\tConsole.WriteLine(Test.Counter);\n}",
+      "answer": ["5", "0", "ничего", "error"]
     }
   ]
 }
