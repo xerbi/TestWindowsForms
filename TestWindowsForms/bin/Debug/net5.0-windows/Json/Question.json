@@ -1,0 +1,38 @@
+{
+  "question_level1": [
+    {
+      "question": "����� ����������� ��������� ������ ���� int?",
+      "answer": [ "4 �����", "2 �����", "1 ����", "3 �����" ]
+    },
+    {
+      "question": "",
+      "answer": []
+    },
+    {
+      "question": "",
+      "answer": []
+    },
+    {
+      "question": "",
+      "answer": []
+    },
+    {
+      "question": "",
+      "answer": []
+    },
+    {
+      "question": "",
+      "answer": []
+    }
+  ],
+  "question_level2": [
+    {
+      "question": "",
+      "answer": []
+    },
+    {
+      "question": ":\nclass Test\n{\n\tstatic int sum (int a, int b)\n{\n\t\treturn a + b;\n\t}\n}"
+      "answer": []
+    }
+  ]
+}
