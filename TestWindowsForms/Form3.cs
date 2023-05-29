@@ -16,8 +16,12 @@ namespace TestWindowsForms
     {
         MainForm startMenu;
         private Serializ questionJson;
-        private int[] chooseQuestionL1 = new int[5];
-        private int[] chooseQuestionL2 = new int[5];
+        private int[] chooseQuestionL1 = new int[Edit.numberOfQuestionL1];
+        private int[] chooseQuestionL2 = new int[Edit.numberOfQuestionL2];
+        private int[] answerQuestion = new int[4];
+        private Label[] labelsAnswer = new Label[4];
+        private RadioButton[] AnswerRadioBtn = new RadioButton[4];
+        private int point = 0;
 
         public TestForm(MainForm start)
         {
@@ -32,7 +36,7 @@ namespace TestWindowsForms
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // Label Question
-            this.question.MaximumSize = new Size(450, 300);
+            this.question.MaximumSize = new Size(330, 300);
             Size s = new Size();
             s.Width = 65;
             s.Height = 28;
@@ -40,42 +44,70 @@ namespace TestWindowsForms
             FirstStart();
         }
 
+        // Генерируется первый вопрос
         private void FirstStart()
         {
+            AnswerRadioBtn[0] = this.answer1;
+            AnswerRadioBtn[1] = this.answer2;
+            AnswerRadioBtn[2] = this.answer3;
+            AnswerRadioBtn[3] = this.answer4;
+
             getRandomNumberMass(chooseQuestionL1);
             getRandomNumberMass(chooseQuestionL2);
             questionJson = JsonConvert.DeserializeObject<Serializ>(OpenJsonFile());
-            int i = 8;
 
-            /*if (questionJson.question_level1[chooseQuestionL1[0]].question.Length > 50)
-            {
-                Size s = new Size();
-                s.Width = 38;
-                s.Height = 13;
-                this.question.Size = s;
-            }*/
-            int test = questionJson.question_level2[i].question.Length;
-            if (test > 100)
-            {
-                this.question.Font = new Font(Font.FontFamily.Name, 8);
-            }
-            //string quest = questionJson.question_level1[chooseQuestionL1[0]].question;
-            string quest = questionJson.question_level2[i].question;
+            string quest = questionJson.question_level1[chooseQuestionL1[0]].question;
+            setParametersLabel(questionJson.question_level1[chooseQuestionL1[0]].question.Length);
             this.question.Text = quest;
+
+            labelsAnswer[0] = this.textAnswer1;
+            labelsAnswer[1] = this.textAnswer2;
+            labelsAnswer[2] = this.textAnswer3;
+            labelsAnswer[3] = this.textAnswer4;
+
+            getRandomNumberMass(answerQuestion);
+            setLabelAnswer(labelsAnswer, answerQuestion, questionJson.question_level1[chooseQuestionL1[0]].answer);
         }
 
+        // Устанавливает вывод текста в зависимости от длинны получаемой строки
+        private void setParametersLabel(int size)
+        {
+            if (size > 250)
+            {
+                this.question.Font = new Font(Font.FontFamily.Name, 8);
+                return;
+            }
+            if (size > 150)
+            {
+                this.question.Font = new Font(Font.FontFamily.Name, 10);
+                return;
+            }
+            
+            this.question.Font = new Font(Font.FontFamily.Name, 15);
+        }
+
+        // устанавливает рандомно ответы
+        private void setLabelAnswer(Label[] label, int[] numberAnswer, string[] answer)
+        {
+            for (int i = 0; i < label.Length; ++i)
+            {
+                label[i].Text = answer[numberAnswer[i]];
+            }
+        }
+
+        // рандомизирует массив с ответами и с вопросами
         private void getRandomNumberMass(int[] massive)
         {
             Random rand = new Random();
-            massive[0] = rand.Next(1, massive.Length + 1);
+            massive[0] = rand.Next(0, massive.Length);
             for (int i = 1; i < massive.Length; ++i)
             {
-                int r = rand.Next(1, massive.Length + 1);
+                int r = rand.Next(1, massive.Length);
                 for (int j = 0; j < i; ++j)
                 {
                     if (r == massive[j])
                     {
-                        r = rand.Next(1, massive.Length + 1);
+                        r = rand.Next(0, massive.Length);
                         j = -1;
                     }
                 }
@@ -115,14 +147,34 @@ namespace TestWindowsForms
                 }
                 catch(Exception e)
                 {
-                    //создать папку
+                    question.Text = "Ошибка! Необходимо настроить программу.";
                 }
             }
             return File.ReadAllText(jsonText);
         }
-        private void testJson()
+
+        private void Answer_Click(object sender, EventArgs e)
         {
-            //var test = JsonConvert
+            int goodAnswer = 0;
+            for (int i = 0; i < 4; ++i)
+            {
+                if (answerQuestion[i] == 0)
+                {
+                    goodAnswer = i;
+                    break;
+                }
+            }
+
+            //point
+            for (int i = 0; i < 4; ++i)
+            {
+                if (AnswerRadioBtn[i].Checked)
+                {
+                    if (i != goodAnswer) break;
+                    point += 1;
+                    break;
+                }
+            }
         }
 
         private void Exit_Click(object sender, EventArgs e)

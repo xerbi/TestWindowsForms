@@ -33,7 +33,7 @@
       "answer": ["private", "public", "static", "protected"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nstatic void testMethod(ref int a)\n{\n\ta += 100;\n}\nstatic void Main(string[] args)\n{\n\tint b = 10;\n\ttestMethod(ref b);\n\tConsole.Write(b);\n}",
+      "question": "Выберите результат выполнения программы:\nstatic void testMethod(ref int a)\n{\n    a += 100;\n}\nstatic void Main(string[] args)\n{\n    int b = 10;\n    testMethod(ref b);\n    Console.Write(b);\n}",
       "answer": ["110", "10", "0", "error"]
     },
     {
@@ -47,39 +47,39 @@
       "answer": [	"enum Day{Sat, Sun, Mon, Tue, Wed, Thu, Fri}", "enum {Sat, Sun, Mon, Tue, Wed, Thu, Fri}", "{Sat, Sun, Mon, Tue, Wed, Thu, Fri} as Enum", "list Day{Sat, Sun, Mon, Tue, Wed, Thu, Fri}"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nclass Test\n{\n\tstatic int sum (int a, int b)\n\t{\n\t\treturn a + b;\n\t}\n}\nstatic void Main(string[] args)\n{\n\tTest t = new Test();\n\tint result = t.sum(10, 20);\n\tConsole.Write(result);\n}",
+      "question": "Выберите результат выполнения программы:\nclass Test\n{\n    static int sum (int a, int b)\n    {\n        return a + b;\n    }\n}\nstatic void Main(string[] args)\n{\n    Test t = new Test();\n    int result = t.sum(10, 20);\n    Console.Write(result);\n}",
       "answer": ["error", "30", "0", "-30"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nclass A\n{\n\tpublic int a;\n\tpublic int b;\n\tpublic int sum() => a + b;\n}\nclass Test : A\n{\n\tpublic int c;\n\tpublic int sum() => a + b + c;\n}\nstatic void Main(string[] args)\n{\n\tTest t = new Test();\n\tt.a = 10;\n\tt.b = 20;\n\tt.c = 30;\n\tint result = t.sum();\n\tConsole.Write(result);\n}",
+      "question": "Выберите результат выполнения программы:\nclass A\n{\n    public int a;\n    public int b;\n    public int sum() => a + b;\n}\nclass Test : A\n{\n    public int c;\n    public int sum() => a + b + c;\n}\nstatic void Main(string[] args)\n{\n    Test t = new Test();\n    t.a = 10;\n    t.b = 20;\n    t.c = 30;\n    int result = t.sum();\n    Console.Write(result);\n}",
       "answer": ["60", "30", "0", "error"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nif (false)\n{\nint i = 1;\n}\nint i = 2;\nConsole.Write(i);",
+      "question": "Выберите результат выполнения программы:\nif (false)\n{\n    int i = 1;\n}\nint i = 2;\nConsole.Write(i);",
       "answer": ["error", "1", "2", "0"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nclass A { }\nclass B : A { }\nstatic void Main(string[] args)\n{\n\tA a = new A();\n\tB b = new B();\nConsole.WriteLine(a is A);\nConsole.WriteLine(a is B);\nConsole.WriteLine(b is A);\nConsole.WriteLine(b is B);\n}",
+      "question": "Выберите результат выполнения программы:\nclass A { }\nclass B : A { }\nstatic void Main(string[] args)\n{\n    A a = new A();\n    B b = new B();\nConsole.WriteLine(a is A);\nConsole.WriteLine(a is B);\nConsole.WriteLine(b is A);\nConsole.WriteLine(b is B);\n}",
       "answer": ["True False True True", "True False True False", "True False False True", "error"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nint[] mas = new int[10];\nforeach (var i in mas)\n{\n\tConsole.WriteLine(i);\n}",
+      "question": "Выберите результат выполнения программы:\nint[] mas = new int[10];\nforeach (var i in mas)\n{\n    Console.WriteLine(i);\n}",
       "answer": ["0 0 0 0 0 0 0 0 0 0", "1 2 3 4 5 6 7 8 9 10", "0 1 2 3 4 5 6 7 8 9", "ничего не выведет"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n\treturn a - b;\n}\nstatic float testMethod(int b, int a)\n{\n\treturn a + b;\n}\nstatic void Main(string[] args)\n{\n\tConsole.WriteLine(testMethod(30, 20));\n}",
+      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n    return a - b;\n}\nstatic float testMethod(int b, int a)\n{\n    return a + b;\n}\nstatic void Main(string[] args)\n{\n    Console.WriteLine(testMethod(30, 20));\n}",
       "answer": ["Error", "10", "50", "0"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nclass A\n{\n\tpublic int sum(int a, int b) => a + b;\n}\nclass B\n{\n\tpublic float multiply(int a, int b) => a * b;\n}\nclass C : A : B {}\nstatic void Main(string[] args)\n{\n\tC c = new C();\n\tConsole.WriteLine(c.sum(10, 10));\n\tConsole.WriteLine(c.multiply(10, 10));\n}",
+      "question": "Выберите результат выполнения программы:\nclass A\n{\n    public int sum(int a, int b) => a + b;\n}\nclass B\n{\n    public float multiply(int a, int b) => a * b;\n}\nclass C : A : B {}\nstatic void Main(string[] args)\n{\n    C c = new C();\n    Console.WriteLine(c.sum(10, 10));\n     Console.WriteLine(c.multiply(10, 10));\n}",
       "answer": ["error", "20 100", "0", "ничего"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n\treturn a - b;\n}\nstatic int testMethod(float b, int a)\n{\n\treturn a + b;\n}\nstatic void Main(string[] args)\n{\n\tConsole.WriteLine(testMethod(30, 20));\n}",
+      "question": "Выберите результат выполнения программы:\nstatic int testMethod(int a, int b)\n{\n    return a - b;\n}\nstatic int testMethod(float b, int a)\n{\n    return a + b;\n}\nstatic void Main(string[] args)\n{\n    Console.WriteLine(testMethod(30, 20));\n}",
       "answer": ["10", "error", "50", "0"]
     },
     {
-      "question": "Выберите результат выполнения программы:\nclass Test\n{\n\tstatic int counter = 0;\n\tpublic static int Counter => counter;\n\tpublic Test()\n\t{\n\t\tcounter++;\n\t}\n}\nstatic void Main(string[] args)\n{\n\tTest t1 = new Test();\n\tTest t2 = new Test();\n\tTest t3 = new Test();\n\tTest t4 = new Test();\n\tTest t5 = new Test();\n\tConsole.WriteLine(Test.Counter);\n}",
+      "question": "Выберите результат выполнения программы:\nclass Test\n{\n    static int counter = 0;\n    public static int Counter => counter;\n    public Test()\n    {\n        counter++;\n    }\n}\nstatic void Main(string[] args)\n{\n    Test t1 = new Test();\n    Test t2 = new Test();\n    Test t3 = new Test();\n    Test t4 = new Test();\n    Test t5 = new Test();\n    Console.WriteLine(Test.Counter);\n}",
       "answer": ["5", "0", "ничего", "error"]
     }
   ]

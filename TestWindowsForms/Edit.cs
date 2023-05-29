@@ -12,6 +12,8 @@ namespace TestWindowsForms
 {
     public partial class Edit : Form
     {
+        static public int numberOfQuestionL1 = 5;
+        static public int numberOfQuestionL2 = 5;
         MainForm startMenu;
         public Edit(MainForm start)
         {
