@@ -22,6 +22,8 @@ namespace TestWindowsForms
         private Label[] labelsAnswer = new Label[4];
         private RadioButton[] AnswerRadioBtn = new RadioButton[4];
         private int point = 0;
+        private int counterL1 = 0;
+        private int counterL2 = 0;
 
         public TestForm(MainForm start)
         {
@@ -37,6 +39,10 @@ namespace TestWindowsForms
 
             // Label Question
             this.question.MaximumSize = new Size(330, 300);
+            this.textAnswer1.MaximumSize = new Size(170, 100);
+            this.textAnswer2.MaximumSize = new Size(170, 100);
+            this.textAnswer3.MaximumSize = new Size(170, 100);
+            this.textAnswer4.MaximumSize = new Size(170, 100);
             Size s = new Size();
             s.Width = 65;
             s.Height = 28;
@@ -54,10 +60,12 @@ namespace TestWindowsForms
 
             getRandomNumberMass(chooseQuestionL1);
             getRandomNumberMass(chooseQuestionL2);
-            questionJson = JsonConvert.DeserializeObject<Serializ>(OpenJsonFile());
+            string path = @"Json\Question.json";
+            questionJson = JsonConvert.DeserializeObject<Serializ>(OpenJsonFile(path));
+            Edit.EncryptFile(path, Edit.key);
 
-            string quest = questionJson.question_level1[chooseQuestionL1[0]].question;
-            setParametersLabel(questionJson.question_level1[chooseQuestionL1[0]].question.Length);
+            string quest = questionJson.question_level1[chooseQuestionL1[counterL1]].question;
+            setParametersLabel(questionJson.question_level1[chooseQuestionL1[counterL1]].question.Length);
             this.question.Text = quest;
 
             labelsAnswer[0] = this.textAnswer1;
@@ -66,7 +74,7 @@ namespace TestWindowsForms
             labelsAnswer[3] = this.textAnswer4;
 
             getRandomNumberMass(answerQuestion);
-            setLabelAnswer(labelsAnswer, answerQuestion, questionJson.question_level1[chooseQuestionL1[0]].answer);
+            setLabelAnswer(labelsAnswer, answerQuestion, questionJson.question_level1[chooseQuestionL1[counterL1]].answer);
         }
 
         // Устанавливает вывод текста в зависимости от длинны получаемой строки
@@ -82,13 +90,39 @@ namespace TestWindowsForms
                 this.question.Font = new Font(Font.FontFamily.Name, 10);
                 return;
             }
-            
+
             this.question.Font = new Font(Font.FontFamily.Name, 15);
+        }
+
+        private void setParametersLabelAnswer(int size)
+        {
+            if (size > 22)
+            {
+                this.textAnswer1.Font = new Font(Font.FontFamily.Name, 8);
+                this.textAnswer2.Font = new Font(Font.FontFamily.Name, 8);
+                this.textAnswer3.Font = new Font(Font.FontFamily.Name, 8);
+                this.textAnswer4.Font = new Font(Font.FontFamily.Name, 8);
+                return;
+            }
+            if (size > 10)
+            {
+                this.textAnswer1.Font = new Font(Font.FontFamily.Name, 10);
+                this.textAnswer2.Font = new Font(Font.FontFamily.Name, 10);
+                this.textAnswer3.Font = new Font(Font.FontFamily.Name, 10);
+                this.textAnswer4.Font = new Font(Font.FontFamily.Name, 10);
+                return;
+            }
+
+            this.textAnswer1.Font = new Font(Font.FontFamily.Name, 15);
+            this.textAnswer2.Font = new Font(Font.FontFamily.Name, 15);
+            this.textAnswer3.Font = new Font(Font.FontFamily.Name, 15);
+            this.textAnswer4.Font = new Font(Font.FontFamily.Name, 15);
         }
 
         // устанавливает рандомно ответы
         private void setLabelAnswer(Label[] label, int[] numberAnswer, string[] answer)
         {
+            setParametersLabelAnswer(answer[0].Length);
             for (int i = 0; i < label.Length; ++i)
             {
                 label[i].Text = answer[numberAnswer[i]];
@@ -132,54 +166,87 @@ namespace TestWindowsForms
             else e.Cancel = true;
         }
 
-        private string OpenJsonFile()
+        private string OpenJsonFile(string jsonText)
         {
-            string jsonText = @"Json\Question.json";
-
             if (!File.Exists(jsonText))
             {
-                try 
+                try
                 {
                     using (StreamWriter sw = File.CreateText(jsonText))
                     {
                         sw.WriteLine("test");
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     question.Text = "Ошибка! Необходимо настроить программу.";
                 }
             }
+            Edit.DecryptFile(jsonText, Edit.key);
             return File.ReadAllText(jsonText);
         }
 
         private void Answer_Click(object sender, EventArgs e)
         {
+            if (counterL1 < Edit.numberOfQuestionL1 - 1)
+            {
+                checkAnswer(answerQuestion, AnswerRadioBtn, 1);
+                counterL1 += 1;
+
+                string quest1 = questionJson.question_level1[chooseQuestionL1[counterL1]].question;
+                setParametersLabel(questionJson.question_level1[chooseQuestionL1[counterL1]].question.Length);
+                this.question.Text = quest1;
+
+                getRandomNumberMass(answerQuestion);
+                setLabelAnswer(labelsAnswer, answerQuestion, questionJson.question_level1[chooseQuestionL1[counterL1]].answer);
+                return;
+            }
+
+            if (!(counterL2 < Edit.numberOfQuestionL2))
+            {
+                this.btnAnswer.Text = "Выход";
+                this.groupBox1.Visible = false;
+                this.btnAnswer.Click -= new System.EventHandler(this.Answer_Click);
+                this.btnAnswer.Click += new System.EventHandler(this.End);
+                return;
+            }
+
+            checkAnswer(answerQuestion, AnswerRadioBtn, 2);
+            string quest2 = questionJson.question_level2[chooseQuestionL2[counterL2]].question;
+            setParametersLabel(questionJson.question_level2[chooseQuestionL2[counterL2]].question.Length);
+            this.question.Text = quest2;
+
+            getRandomNumberMass(answerQuestion);
+            setLabelAnswer(labelsAnswer, answerQuestion, questionJson.question_level2[chooseQuestionL2[counterL2]].answer);
+            counterL2 += 1;
+        }
+
+        private void End(object sender, EventArgs e)
+        {
+            this.question.Text = "Hello!";
+        }
+
+        private void checkAnswer(int[] answer, RadioButton[] btn, int p)
+        {
             int goodAnswer = 0;
             for (int i = 0; i < 4; ++i)
             {
-                if (answerQuestion[i] == 0)
+                if (answer[i] == 0)
                 {
                     goodAnswer = i;
                     break;
                 }
             }
 
-            //point
             for (int i = 0; i < 4; ++i)
             {
-                if (AnswerRadioBtn[i].Checked)
+                if (btn[i].Checked)
                 {
                     if (i != goodAnswer) break;
-                    point += 1;
+                    point += p;
                     break;
                 }
             }
-        }
-
-        private void Exit_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

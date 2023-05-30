@@ -3,6 +3,7 @@ namespace TestWindowsForms
 {
     partial class TestForm
     {
+        //public delegate answer += new System.EventHandler(this.Answer_Click);
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -30,7 +31,6 @@ namespace TestWindowsForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Exit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textAnswer2 = new System.Windows.Forms.Label();
             this.textAnswer1 = new System.Windows.Forms.Label();
@@ -42,20 +42,9 @@ namespace TestWindowsForms
             this.answer3 = new System.Windows.Forms.RadioButton();
             this.question = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAnswer = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Exit
-            // 
-            this.Exit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Exit.Location = new System.Drawing.Point(342, 519);
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(130, 30);
-            this.Exit.TabIndex = 0;
-            this.Exit.Text = "Exit";
-            this.Exit.UseVisualStyleBackColor = true;
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // groupBox1
             // 
@@ -166,26 +155,25 @@ namespace TestWindowsForms
             this.question.TabIndex = 2;
             this.question.Text = "label1";
             // 
-            // button1
+            // btnAnswer
             // 
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(174, 519);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Выбрать ответ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Answer_Click);
+            this.btnAnswer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnAnswer.Location = new System.Drawing.Point(174, 519);
+            this.btnAnswer.Name = "btnAnswer";
+            this.btnAnswer.Size = new System.Drawing.Size(130, 30);
+            this.btnAnswer.TabIndex = 3;
+            this.btnAnswer.Text = "Выбрать ответ";
+            this.btnAnswer.UseVisualStyleBackColor = true;
+            this.btnAnswer.Click += new System.EventHandler(this.Answer_Click);
             // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 561);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAnswer);
             this.Controls.Add(this.question);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.Exit);
             this.MaximumSize = new System.Drawing.Size(500, 600);
             this.MinimumSize = new System.Drawing.Size(500, 600);
             this.Name = "TestForm";
@@ -199,8 +187,6 @@ namespace TestWindowsForms
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.GroupBox groupBox1;
         public System.Windows.Forms.Label textAnswer4;
         public System.Windows.Forms.Label textAnswer2;
@@ -212,6 +198,6 @@ namespace TestWindowsForms
         private System.Windows.Forms.ToolTip toolTip1;
         public System.Windows.Forms.Label textAnswer3;
         private System.Windows.Forms.RadioButton answer3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAnswer;
     }
 }
