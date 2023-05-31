@@ -10,9 +10,6 @@ using System.Windows.Forms;
 
 namespace TestWindowsForms
 {
-
-
-
     public partial class MainForm : Form
     {
         ResultForm resultList;
@@ -41,13 +38,6 @@ namespace TestWindowsForms
         {
             resultList = new ResultForm(this);
             resultList.Show();
-            HiddenForm();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            editForm = new Edit(this);
-            editForm.Show();
             HiddenForm();
         }
 

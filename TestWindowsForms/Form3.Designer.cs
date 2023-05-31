@@ -43,6 +43,7 @@ namespace TestWindowsForms
             this.question = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAnswer = new System.Windows.Forms.Button();
+            this.Name = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,17 +167,26 @@ namespace TestWindowsForms
             this.btnAnswer.UseVisualStyleBackColor = true;
             this.btnAnswer.Click += new System.EventHandler(this.Answer_Click);
             // 
+            // Name
+            // 
+            this.Name.Location = new System.Drawing.Point(132, 207);
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(233, 23);
+            this.Name.TabIndex = 4;
+            this.Name.Text = "Введите сове имя";
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 561);
+            this.Controls.Add(this.Name);
             this.Controls.Add(this.btnAnswer);
             this.Controls.Add(this.question);
             this.Controls.Add(this.groupBox1);
             this.MaximumSize = new System.Drawing.Size(500, 600);
             this.MinimumSize = new System.Drawing.Size(500, 600);
-            this.Name = "TestForm";
+            this.Name.Text = "Введите свое имя";
             this.Text = "Form3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Test_Close);
             this.groupBox1.ResumeLayout(false);
@@ -199,5 +209,6 @@ namespace TestWindowsForms
         public System.Windows.Forms.Label textAnswer3;
         private System.Windows.Forms.RadioButton answer3;
         private System.Windows.Forms.Button btnAnswer;
+        private System.Windows.Forms.TextBox Name;
     }
 }

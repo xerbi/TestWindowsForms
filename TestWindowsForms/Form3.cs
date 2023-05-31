@@ -24,13 +24,14 @@ namespace TestWindowsForms
         private int point = 0;
         private int counterL1 = 0;
         private int counterL2 = 0;
+        private bool exite = true;
+        private string answerTExt;
 
         public TestForm(MainForm start)
         {
             InitializeComponent();
-
             startMenu = start;
-
+            this.Name.Visible = false;
             this.Size = new Size(500, 600);
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
@@ -62,7 +63,6 @@ namespace TestWindowsForms
             getRandomNumberMass(chooseQuestionL2);
             string path = @"Json\Question.json";
             questionJson = JsonConvert.DeserializeObject<Serializ>(OpenJsonFile(path));
-            Edit.EncryptFile(path, Edit.key);
 
             string quest = questionJson.question_level1[chooseQuestionL1[counterL1]].question;
             setParametersLabel(questionJson.question_level1[chooseQuestionL1[counterL1]].question.Length);
@@ -151,6 +151,7 @@ namespace TestWindowsForms
 
         private void Test_Close(object sender, FormClosingEventArgs e)
         {
+            if (!exite) return;
             DialogResult dialog = MessageBox.Show(
                 "Вы уверенны, что хотите выйти из тестирования? Ваши данные при этом не сохраняться!",
                 "Завершение тестирования",
@@ -182,8 +183,9 @@ namespace TestWindowsForms
                     question.Text = "Ошибка! Необходимо настроить программу.";
                 }
             }
-            Edit.DecryptFile(jsonText, Edit.key);
-            return File.ReadAllText(jsonText);
+            //File.ReadAllText(jsonText);
+            
+            return Edit.DecryptData(jsonText);
         }
 
         private void Answer_Click(object sender, EventArgs e)
@@ -204,10 +206,18 @@ namespace TestWindowsForms
 
             if (!(counterL2 < Edit.numberOfQuestionL2))
             {
+                int allPoint = Edit.numberOfQuestionL1 + Edit.numberOfQuestionL2 * 2;
+                if (Edit.SUCCESSFUL < point) answerTExt = "5";
+                else if (Edit.GOOD < point) answerTExt = "4";
+                else if (Edit.NORMAL < point) answerTExt = "3";
+                else answerTExt = "2";
                 this.btnAnswer.Text = "Выход";
+                setParametersLabel(1);
+                this.question.Text = $"Ваш результат: {point}/{allPoint}\nВаша оценка - {answerTExt}";
                 this.groupBox1.Visible = false;
                 this.btnAnswer.Click -= new System.EventHandler(this.Answer_Click);
                 this.btnAnswer.Click += new System.EventHandler(this.End);
+                this.Name.Visible = true;
                 return;
             }
 
@@ -223,7 +233,16 @@ namespace TestWindowsForms
 
         private void End(object sender, EventArgs e)
         {
-            this.question.Text = "Hello!";
+            startMenu.Visible = true;
+            exite = false;
+            Edit.DecryptFile(@"json\Result.txt", Edit.key);
+            using (var tw = File.AppendText(@"json\Result.txt"))
+            {
+                
+                tw.WriteLine($"{this.Name.Text} - {answerTExt}");
+            }
+            Edit.EncryptFile(@"json\Result.txt", Edit.key);
+            this.Close();
         }
 
         private void checkAnswer(int[] answer, RadioButton[] btn, int p)

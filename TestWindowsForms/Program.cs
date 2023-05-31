@@ -19,8 +19,6 @@ namespace TestWindowsForms
             Application.SetCompatibleTextRenderingDefault(false);
 
             Application.Run(new MainForm());
-            //Application.Run(new ResultForm());
-            //Application.Run(new TestForm());
         }
     }
 }

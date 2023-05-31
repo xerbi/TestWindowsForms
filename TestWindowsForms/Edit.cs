@@ -25,7 +25,6 @@ namespace TestWindowsForms
         ObjectSettings settings;
         Serializ questions;
 
-        MainForm startMenu;
         public Edit(MainForm start)
         {
             DecryptFile(@"Json\Config.json", key);
@@ -93,6 +92,24 @@ namespace TestWindowsForms
             }
             File.Delete(path);
             File.Move(tmpPath, path);
+        }
+
+        public static string DecryptData (string path)
+        {
+            string outString = "";
+            string tmpPath = Path.GetTempFileName();
+            using (FileStream fsSrc = File.OpenRead(path))
+            {
+                byte[] iv = new byte[16];
+                fsSrc.Read(iv);
+                using (AesManaged aes = new AesManaged() { Key = key, IV = iv })
+                using (CryptoStream cs = new CryptoStream(fsSrc, aes.CreateDecryptor(), CryptoStreamMode.Read, true))
+                using (StreamReader srDecrypt = new StreamReader(cs))
+                {
+                    outString = srDecrypt.ReadToEnd();
+                }
+            }
+            return outString;
         }
     }
 }
